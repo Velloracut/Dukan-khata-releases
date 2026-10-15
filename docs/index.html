@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dukan Khata - ڈاؤن لوڈ</title>
+<meta name="description" content="دکان کا پورا حساب موبائل میں: بل، سٹاک، ادھار، خرچے اور رپورٹ۔ مفت ڈاؤن لوڈ کریں۔">
+<style>
+  :root { --bg:#F4F8F6; --card:#fff; --text:#1B2B26; --sub:#5A6B65; --green:#2E7D32; --teal:#00796B; --line:#DCE6E1; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#101715; --card:#18221F; --text:#E6EFEB; --sub:#9DB0A8; --line:#2A3833; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: "Noto Nastaliq Urdu","Jameel Noori Nastaleeq",system-ui,sans-serif; line-height:2; }
+  main { max-width:560px; margin:0 auto; padding:24px 16px 48px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:20px; margin-bottom:16px; }
+  h1 { margin:0 0 4px; font-size:30px; color:var(--teal); }
+  .sub { color:var(--sub); font-size:15px; }
+  .btn { display:block; text-align:center; background:var(--green); color:#fff; text-decoration:none; font-size:22px; font-weight:700; padding:12px; border-radius:16px; margin-top:14px; }
+  ul, ol { margin:8px 0 0; padding-inline-start:22px; }
+  h2 { margin:0 0 4px; font-size:19px; }
+  .en { direction:ltr; text-align:left; font-family:system-ui,sans-serif; line-height:1.6; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1>Dukan Khata</h1>
+    <div class="sub">دکان کا پورا حساب، آپ کے موبائل میں</div>
+    <a class="btn" id="get" href="/get">ایپ ڈاؤن لوڈ کریں (Android)</a>
+    <div class="sub" id="meta" style="margin-top:8px"></div>
+  </div>
+
+  <div class="card">
+    <h2>ایپ میں کیا ہے؟</h2>
+    <ul>
+      <li>بل بنانا، پرنٹ کرنا، واپسی اور منسوخی</li>
+      <li>سٹاک اور بارکوڈ</li>
+      <li>ادھار کھاتہ اور گاہک کا اسٹیٹمنٹ</li>
+      <li>خرچے، خریداری اور سپلائر</li>
+      <li>روزانہ اور ماہانہ رپورٹ</li>
+      <li>بیک اپ، PIN لاک، اردو اور انگریزی</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>انسٹال کیسے کریں؟</h2>
+    <ol>
+      <li>اوپر والا بٹن دبائیں، فائل ڈاؤن لوڈ ہوگی۔</li>
+      <li>ڈاؤن لوڈ ہونے کے بعد فائل کھولیں۔</li>
+      <li>اگر فون "نامعلوم ذرائع" کی اجازت مانگے تو اجازت دے دیں، پھر Install دبائیں۔</li>
+    </ol>
+    <div class="sub">اگلی بار نیا ورژن آئے تو ایپ کے اندر Settings میں "App update" سے خود اپڈیٹ ہو جائے گی۔</div>
+  </div>
+
+  <div class="card en sub">Android only. If the download does not start, open the
+    <a href="https://github.com/Velloracut/Dukan-khata-releases/releases/latest">releases page</a> and tap the .apk file.</div>
+</main>
+<script>
+  (async () => {
+    try {
+      const j = await (await fetch("/api/latest")).json();
+      if (!j.ok) return;
+      const mb = j.size ? (j.size / 1048576).toFixed(1) + " MB" : "";
+      const d = j.published ? new Date(j.published).toLocaleDateString("en-GB") : "";
+      document.getElementById("meta").textContent = ["ورژن " + j.version, mb, d].filter(Boolean).join(" | ");
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
